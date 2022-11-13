@@ -25,19 +25,34 @@ function getRandomGuess() {
     return parseInt((Math.random() * options.length)+1)
 }
 
-function checkWin(userChoice, opChoice) {
+function play(choice) {
+    opChoice = getRandomGuess()
+    // alert('Play: Choice - ' + choice + '\tOP: ' + opChoice)
+    switch (checkWin(choice, opChoice)) {
+        case true:
+            gamesWon++
+            return winMsg
+        case false:
+            gamesLost++
+            return loseMsg
+        case null:
+            return drawMsg
+    }
+}
 
-    userChoice = (userChoice === opChoice) ? 0 : userChoice
-
-    switch (userChoice) {
+function checkWin(choice1, choice2) {
+    
+    choice1 = (choice1 === choice2) ? 0 : choice1
+    // alert('Check: '+choice1)
+    switch (choice1) {
         case 1: 
-            return (opChoice !== 2) 
+            return (choice2 !== 2)
         case 2:
-            return (opChoice !== 3) 
+            return (choice2 !== 3)
         case 3:
-            return (opChoice !== 1)
+            return (choice2 !== 1)
         default:
-            return null;
+            return null
     }
 }
 
@@ -46,7 +61,7 @@ function showStats(outcome) {
             // + `\t ${(gamesWon/gamesLost)*100}`  
 }
 
-function formatContent(str, ) {
+function formatContent(str) {
     let content = str
                 + '\n*********************************'
     console.log(content)
@@ -59,25 +74,9 @@ userChoice = setUp();
 while (userChoice !== 0) {
     gamesPlayed++
 
-    opChoice = getRandomGuess()
-
-    outcome = checkWin(userChoice, opChoice) 
+    outcome = play(userChoice) 
 
     // alert(`${gamesPlayed} : ${gamesWon} : ${gamesLost}`)
-
-    switch (outcome) {
-        case true:
-            gamesWon++;
-            outcome=winMsg;
-            break;
-        case false:
-            gamesLost++;
-            outcome=loseMsg;
-            break;
-        case null:
-            outcome=drawMsg;
-            break;
-    }
 
     formatContent(`Your choice: ${options[userChoice-1]}`
                 + `\nOpponent choice: ${options[opChoice-1]}`
