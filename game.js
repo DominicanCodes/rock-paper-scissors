@@ -75,7 +75,7 @@ function wordToNum(choice) {
 }
 
 function showStats(outcome) {
-    let winLossRatio = (gamesWon/gamesLost)
+    let winLossRatio = (gamesWon/gamesLost).toFixed(2)
     return gamesPlayed===0 ? ''
             :gamesLost+gamesWon===0 ? `You managed to maintain the `
                                     + `\nstalemate for ${gamesPlayed} game(s).`
