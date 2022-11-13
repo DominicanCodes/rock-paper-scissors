@@ -4,9 +4,12 @@ let gamesPlayed=0, gamesWon=0, gamesLost=0;
 let userChoice, opChoice, outcome
 
 function setUp() {
-    let selection = parseInt(prompt('Choose your weapon:' + showOptions()))
+    let selection
+    while (selection === undefined) {
+        selection = parseInt(prompt('Choose your weapon:' + showOptions()))
+    }
 
-    if (selection < 0 || selection > options.length)
+    if (isNaN(selection) || selection < 0 || selection > options.length)
         return 0
 
     return selection
@@ -57,8 +60,15 @@ function checkWin(choice1, choice2) {
 }
 
 function showStats(outcome) {
-    return `Games won: ${gamesWon} | Games lost: ${gamesLost}`
-            // + `\t ${(gamesWon/gamesLost)*100}`  
+    let winLossRatio = (gamesWon/gamesLost)
+    return gamesPlayed===0 ? ''
+            :gamesLost+gamesWon===0 ? `You managed to maintain the `
+                                    + `\nstalemate for ${gamesPlayed} game(s).`
+            : gamesLost===0 ? `\tWOW you won all ${gamesWon} game(s)!`
+                                + `\n\t(No draws counted here.)`
+            : gamesWon===0 ? `You lost every single game. :(`
+            : `Game(s) won: ${gamesWon} | Game(s) lost: ${gamesLost}`
+            + `\n\tWin/Loss Ratio: ${winLossRatio}`  
 }
 
 function formatContent(str) {
