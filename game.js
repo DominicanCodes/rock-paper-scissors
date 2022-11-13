@@ -5,8 +5,10 @@ let userChoice, opChoice, outcome
 
 function setUp() {
     let selection
-    while (isNaN(selection)) {
-        selection = parseInt(prompt('Choose your weapon:' + showOptions()))
+    while (isNaN(selection) || options.includes(selection)) {
+        selection = prompt('Choose your weapon:' + showOptions())
+        isNaN(selection) ? selection = wordToNum(selection)
+        : selection = parseInt(selection)
     }
 
     if (selection < 0 || selection > options.length)
@@ -34,12 +36,12 @@ function play(choice) {
     switch (checkWin(choice, opChoice)) {
         case true:
             gamesWon++
-            return winMsg
+            return winMsg + ` ${options[choice-1]} beats ${options[opChoice-1]}.`
         case false:
             gamesLost++
-            return loseMsg
+            return loseMsg + `, ${options[opChoice-1]} beats ${options[choice-1]}.`
         case null:
-            return drawMsg
+            return drawMsg + `, ${options[choice-1]} and ${options[opChoice-1]} cancel out.`
     }
 }
 
@@ -56,6 +58,19 @@ function checkWin(choice1, choice2) {
             return (choice2 !== 1)
         default:
             return null
+    }
+}
+
+function wordToNum(choice) {
+    switch (choice.toLowerCase()) {
+        case 'rock':
+            return 1
+        case 'paper':
+            return 2
+        case 'scissors':
+            return 3
+        default:
+            return 0
     }
 }
 
