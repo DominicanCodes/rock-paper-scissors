@@ -5,11 +5,11 @@ let userChoice, opChoice, outcome
 
 function setUp() {
     let selection
-    while (selection === undefined) {
+    while (isNaN(selection)) {
         selection = parseInt(prompt('Choose your weapon:' + showOptions()))
     }
 
-    if (isNaN(selection) || selection < 0 || selection > options.length)
+    if (selection < 0 || selection > options.length)
         return 0
 
     return selection
