@@ -1,19 +1,22 @@
-let options = ['rock', 'paper', 'scissors'];
+const options = ['rock', 'paper', 'scissors'];
+const winMsg = 'You Win!', loseMsg = 'You Lose', drawMsg = 'Draw'
+let gamesPlayed=0, gamesWon=0, gamesLost=0;
+let userChoice, opChoice, outcome
 
 function setUp() {
-    let userChoice = parseInt(prompt('Choose your weapon:' + displayOptions()))
+    let selection = parseInt(prompt('Choose your weapon:' + showOptions()))
 
-    if (userChoice < 0 || userChoice > options.length)
+    if (selection < 0 || selection > options.length)
         return 0
 
-    return userChoice
+    return selection
 }
 
-function displayOptions() {
+function showOptions() {
     let output = '\n'
 
     for (opt=0;opt<options.length; opt++)
-        output += (opt+1) + ': ' + options[opt] + '\n'
+        output += `${opt+1}: ${options[opt]}\n`
 
         return output + '0: Exit'
 }
@@ -28,34 +31,60 @@ function checkWin(userChoice, opChoice) {
 
     switch (userChoice) {
         case 1: 
-            return (opChoice !== 2) ? 'You Win!' : 'You Lose'
+            return (opChoice !== 2) 
         case 2:
-            return (opChoice !== 3) ? 'You Win!' : 'You Lose'
+            return (opChoice !== 3) 
         case 3:
-            return (opChoice !== 1) ? 'You Win!' : 'You Lose'
+            return (opChoice !== 1)
         default:
-            return 'Draw'
+            return null;
     }
 }
 
-function displayContent(str) {
+function showStats(outcome) {
+    return `Games won: ${gamesWon} | Games lost: ${gamesLost}`
+            // + `\t ${(gamesWon/gamesLost)*100}`  
+}
+
+function formatContent(str, ) {
     let content = str
                 + '\n*********************************'
     console.log(content)
     alert(content)
 }
 
-let userChoice = setUp()
+//START GAME
+userChoice = setUp();
 
 while (userChoice !== 0) {
-    let opChoice = getRandomGuess()
+    gamesPlayed++
 
-    displayContent('Your choice: ' + options[userChoice-1]
-                   + '\nOpponent choice: ' + options[opChoice-1]
-                   + '\n--------------------------------\n'
-                   + checkWin(userChoice, opChoice))
+    opChoice = getRandomGuess()
+
+    outcome = checkWin(userChoice, opChoice) 
+
+    // alert(`${gamesPlayed} : ${gamesWon} : ${gamesLost}`)
+
+    switch (outcome) {
+        case true:
+            gamesWon++;
+            outcome=winMsg;
+            break;
+        case false:
+            gamesLost++;
+            outcome=loseMsg;
+            break;
+        case null:
+            outcome=drawMsg;
+            break;
+    }
+
+    formatContent(`Your choice: ${options[userChoice-1]}`
+                + `\nOpponent choice: ${options[opChoice-1]}`
+                + `\n--------------------------------\n${outcome}`)
 
     userChoice = setUp()
 }
 
+console.log(showStats(outcome))
 console.log ('************GAME OVER************')
