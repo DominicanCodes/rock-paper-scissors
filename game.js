@@ -1,10 +1,11 @@
 let options = ['rock', 'paper', 'scissors'];
-let userChoice = setUp()
 
 function setUp() {
-    let userChoice = parseInt(prompt('Choose your weapon:' + displayOptions())) 
+    let userChoice = parseInt(prompt('Choose your weapon:' + displayOptions()))
+
     if (userChoice < 0 || userChoice > options.length)
         return 0
+
     return userChoice
 }
 
@@ -21,9 +22,9 @@ function getRandomGuess() {
     return parseInt((Math.random() * options.length)+1)
 }
 
-function checkWin(userChoice, opChoice = getRandomGuess()) {
-    console.log('Your choice: ' + options[userChoice-1] + '' + userChoice)
-    console.log('Opponent choice: ' + options[opChoice-1] + '' + opChoice)
+function checkWin(userChoice, opChoice) {
+
+    userChoice = (userChoice === opChoice) ? 0 : userChoice
 
     switch (userChoice) {
         case 1: 
@@ -35,11 +36,26 @@ function checkWin(userChoice, opChoice = getRandomGuess()) {
         default:
             return 'Draw'
     }
-        
 }
 
+function displayContent(str) {
+    let content = str
+                + '\n*********************************'
+    console.log(content)
+    alert(content)
+}
+
+let userChoice = setUp()
+
 while (userChoice !== 0) {
-    checkWin(userChoice)
-    console.log('********************************')
+    let opChoice = getRandomGuess()
+
+    displayContent('Your choice: ' + options[userChoice-1]
+                   + '\nOpponent choice: ' + options[opChoice-1]
+                   + '\n--------------------------------\n'
+                   + checkWin(userChoice, opChoice))
+
     userChoice = setUp()
 }
+
+console.log ('************GAME OVER************')
