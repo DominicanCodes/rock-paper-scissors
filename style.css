@@ -14,7 +14,7 @@ h1 {
     padding-top: 10%;
 }
 
-.choice {
+.choices div {
     display: flex;
     flex-shrink: 0;
     width: 200px;
@@ -26,11 +26,11 @@ h1 {
     user-select: none;
 }
 
-.choice:hover {
+.choices div:hover {
     box-shadow: 0 0 10px antiquewhite;
 }
 
-.choice:active {
+.choices div:active {
     background-color: antiquewhite;
     color: rgb(78, 78, 78);
 }

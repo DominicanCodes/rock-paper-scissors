@@ -93,7 +93,7 @@ function formatContent(str) {
     alert(content)
 }
 
-//START GAME
+//START GAME OLD
 function start_game_old() {
 userChoice = setUp();
 
@@ -116,3 +116,15 @@ console.log ('************GAME OVER************')
 }
 
 // start_game_old()
+
+// NEW CODE
+const choices2 = document.querySelectorAll(".choice");
+console.log(choices2);
+
+choices2.forEach(choice => choice.addEventListener('click', console.log(choice)));
+function playRound(e) {
+    // if (!choice) return;
+
+}
+
+// playRound()
