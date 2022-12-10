@@ -2,3 +2,35 @@ html {
     background-color: rgb(78, 78, 78);
     color: white;
 }
+
+h1 {
+    text-align: center;
+}
+
+.choices {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 10%;
+}
+
+.choice {
+    display: flex;
+    flex-shrink: 0;
+    width: 200px;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+    border-style: solid;
+    border-radius: 5px;
+    user-select: none;
+}
+
+.choice:hover {
+    box-shadow: 0 0 10px antiquewhite;
+}
+
+.choice:active {
+    background-color: antiquewhite;
+    color: rgb(78, 78, 78);
+}
