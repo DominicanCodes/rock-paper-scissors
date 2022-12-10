@@ -93,14 +93,27 @@ function insertAfter(newNode, referenceNode) {
     // console.log('insert method')
 }
 
+const reloadPage = () => {
+    if (confirm("Are you sure, want to refresh?")) {
+        location.reload();
+    }
+}
+
 function endScreen(result, rmElements) {
     rmElements.forEach(elem => elem.remove());
 
     // console.log('end method')
     const end = document.createElement("div");
-    const body = document.querySelector(".choices");
+    end.id = 'stats'
+    const choices = document.querySelector(".choices");
     end.textContent = showStats();
-    insertAfter(end, body);
+    insertAfter(end, choices);
+
+    const newGame = document.createElement("BUTTON");
+    const stats = document.querySelector("#stats");
+    newGame.textContent = "New Game";
+    newGame.id = 'refresh'
+    insertAfter(newGame, stats);
 }
 
 // NEW GAME GUI
