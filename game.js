@@ -5,6 +5,8 @@ let userChoice, opChoice, outcome
 
 function play(choice) {
     opChoice = getRandomGuess()
+
+    gamesPlayed++
     // alert('Play: Choice - ' + choice + '\tOP: ' + opChoice)
     switch (checkWin(choice, opChoice)) {
         case true:
@@ -63,6 +65,17 @@ function wordToNum(choice) {
     }
 }
 
+function updateScore(message){
+    const result = document.querySelector("#result");
+    const userScore = document.querySelector("#p1");
+    const opScore = document.querySelector("#p2");
+
+    result.textContent = message;
+    userScore.textContent = gamesWon;
+    opScore.textContent = gamesLost;
+}
+
+
 function showStats(outcome) {
     let winLossRatio = (gamesWon/gamesLost).toFixed(2)
     return gamesPlayed===0 ? ''
@@ -77,13 +90,13 @@ function showStats(outcome) {
 
 // NEW GAME GUI
 const choices = document.querySelectorAll(".choices div");
-const message = document.querySelector("#result");
 
 choices.forEach(choice => choice.addEventListener('click', playRound));
 function playRound(e) {
-    userChoice = e.target.id
-    userChoice = wordToNum(userChoice)
-    message.textContent = play(userChoice);
+    userChoice = e.target.id;
+    userChoice = wordToNum(userChoice);
+    let message = play(userChoice);
+    updateScore(message);
 }
 
 // OLD GAME --------------------------------------------------------------------
@@ -107,7 +120,6 @@ function formatContent(str) {
 function start_game_old() {
 do {
     userChoice = prompt('Choose your weapon:' + showOptions());
-    gamesPlayed++
 
     outcome = play(userChoice) 
 

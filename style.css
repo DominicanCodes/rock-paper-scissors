@@ -7,7 +7,7 @@ h1 {
     text-align: center;
 }
 
-.scores {
+.scores, .scores div {
     display: flex;
     justify-content: space-between;
     align-items: center;
