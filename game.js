@@ -3,33 +3,6 @@ const winMsg = 'You Win!', loseMsg = 'You Lose', drawMsg = 'Draw'
 let gamesPlayed=0, gamesWon=0, gamesLost=0;
 let userChoice, opChoice, outcome
 
-function setUp() {
-    let selection
-    while (isNaN(selection) || options.includes(selection)) {
-        selection = prompt('Choose your weapon:' + showOptions())
-        isNaN(selection) ? selection = wordToNum(selection)
-        : selection = parseInt(selection)
-    }
-
-    if (selection < 0 || selection > options.length)
-        return 0
-
-    return selection
-}
-
-function showOptions() {
-    let output = '\n'
-
-    for (opt=0;opt<options.length; opt++)
-        output += `${opt+1}: ${options[opt]}\n`
-
-        return output + '0: Exit'
-}
-
-function getRandomGuess() {
-    return parseInt((Math.random() * options.length)+1)
-}
-
 function play(choice) {
     opChoice = getRandomGuess()
     // alert('Play: Choice - ' + choice + '\tOP: ' + opChoice)
@@ -45,9 +18,15 @@ function play(choice) {
     }
 }
 
+function getRandomGuess() {
+    return parseInt((Math.random() * options.length)+1)
+}
+
 function checkWin(choice1, choice2) {
-    
+
+    choice1 = formatSelection(choice1)    
     choice1 = (choice1 === choice2) ? 0 : choice1
+
     // alert('Check: '+choice1)
     switch (choice1) {
         case 1: 
@@ -59,6 +38,16 @@ function checkWin(choice1, choice2) {
         default:
             return null
     }
+}
+
+function formatSelection(selection) {
+    isNaN(selection) ? selection = wordToNum(selection)
+        : selection = parseInt(selection)
+    
+    if (selection < 0 || selection > options.length)
+        return 0
+
+    return selection
 }
 
 function wordToNum(choice) {
@@ -86,6 +75,27 @@ function showStats(outcome) {
             + `\n\tWin/Loss Ratio: ${winLossRatio}`  
 }
 
+// NEW GAME GUI
+const choices = document.querySelectorAll(".choices div");
+console.log(choices);
+
+choices.forEach(choice => choice.addEventListener('click', playRound));
+function playRound(e) {
+    userChoice = e.target.id
+    userChoice = wordToNum(userChoice)
+    console.log(play(userChoice));
+}
+
+// OLD GAME --------------------------------------------------------------------
+function showOptions() {
+    let output = '\n'
+
+    for (opt=0;opt<options.length; opt++)
+        output += `${opt+1}: ${options[opt]}\n`
+
+    return output + '0: Exit'
+}
+
 function formatContent(str) {
     let content = str
                 + '\n*********************************'
@@ -95,9 +105,8 @@ function formatContent(str) {
 
 //START GAME OLD
 function start_game_old() {
-userChoice = setUp();
-
-while (userChoice !== 0) {
+do {
+    userChoice = prompt('Choose your weapon:' + showOptions());
     gamesPlayed++
 
     outcome = play(userChoice) 
@@ -107,24 +116,10 @@ while (userChoice !== 0) {
     formatContent(`Your choice: ${options[userChoice-1]}`
                 + `\nOpponent choice: ${options[opChoice-1]}`
                 + `\n--------------------------------\n${outcome}`)
-
-    userChoice = setUp()
-}
+} while (userChoice !== 0)
 
 console.log(showStats(outcome))
 console.log ('************GAME OVER************')
 }
 
 // start_game_old()
-
-// NEW CODE
-const choices2 = document.querySelectorAll(".choice");
-console.log(choices2);
-
-choices2.forEach(choice => choice.addEventListener('click', console.log(choice)));
-function playRound(e) {
-    // if (!choice) return;
-
-}
-
-// playRound()
