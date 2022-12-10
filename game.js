@@ -77,13 +77,13 @@ function showStats(outcome) {
 
 // NEW GAME GUI
 const choices = document.querySelectorAll(".choices div");
-console.log(choices);
+const message = document.querySelector("#result");
 
 choices.forEach(choice => choice.addEventListener('click', playRound));
 function playRound(e) {
     userChoice = e.target.id
     userChoice = wordToNum(userChoice)
-    console.log(play(userChoice));
+    message.textContent = play(userChoice);
 }
 
 // OLD GAME --------------------------------------------------------------------
