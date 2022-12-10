@@ -1,7 +1,7 @@
 const options = ['rock', 'paper', 'scissors'];
 const winMsg = 'You Win!', loseMsg = 'You Lose', drawMsg = 'Draw'
 let gamesPlayed=0, gamesWon=0, gamesLost=0;
-let userChoice, opChoice, outcome
+let userChoice, opChoice, outcome, message
 
 function play(choice) {
     opChoice = getRandomGuess()
@@ -76,7 +76,7 @@ function updateScore(message){
 }
 
 
-function showStats(outcome) {
+function showStats() {
     let winLossRatio = (gamesWon/gamesLost).toFixed(2)
     return gamesPlayed===0 ? ''
             :gamesLost+gamesWon===0 ? `You managed to maintain the `
@@ -88,15 +88,37 @@ function showStats(outcome) {
             + `\n\tWin/Loss Ratio: ${winLossRatio}`  
 }
 
+function insertAfter(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    // console.log('insert method')
+}
+
+function endScreen(result, rmElements) {
+    rmElements.forEach(elem => elem.remove());
+
+    // console.log('end method')
+    const end = document.createElement("div");
+    const body = document.querySelector(".choices");
+    end.textContent = showStats();
+    insertAfter(end, body);
+}
+
 // NEW GAME GUI
 const choices = document.querySelectorAll(".choices div");
+const result = document.querySelector("#result");
 
 choices.forEach(choice => choice.addEventListener('click', playRound));
 function playRound(e) {
+    
     userChoice = e.target.id;
     userChoice = wordToNum(userChoice);
-    let message = play(userChoice);
+    message = play(userChoice);
+    
     updateScore(message);
+
+    if (gamesWon == 5 || gamesLost == 5) {
+        endScreen(result, choices);
+    }
 }
 
 // OLD GAME --------------------------------------------------------------------
@@ -130,7 +152,7 @@ do {
                 + `\n--------------------------------\n${outcome}`)
 } while (userChoice !== 0)
 
-console.log(showStats(outcome))
+console.log(showStats())
 console.log ('************GAME OVER************')
 }
 
