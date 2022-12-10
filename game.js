@@ -94,6 +94,7 @@ function formatContent(str) {
 }
 
 //START GAME
+function start_game_old() {
 userChoice = setUp();
 
 while (userChoice !== 0) {
@@ -112,3 +113,6 @@ while (userChoice !== 0) {
 
 console.log(showStats(outcome))
 console.log ('************GAME OVER************')
+}
+
+// start_game_old()
