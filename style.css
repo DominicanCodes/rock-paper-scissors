@@ -67,3 +67,12 @@ h1 {
     user-select: none;
     max-width: 200px;
 }
+
+#refresh:hover {
+    box-shadow: 0 0 10px antiquewhite;
+}
+
+#refresh:active {
+    background-color: antiquewhite;
+    color: rgb(78, 78, 78);
+}
