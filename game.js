@@ -93,6 +93,11 @@ function insertAfter(newNode, referenceNode) {
     // console.log('insert method')
 }
 
+function insertChild(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    console.log('insert Child method')
+}
+
 const reloadPage = () => {
     if (confirm("Are you sure, want to start a new game?")) {
         location.reload(true);
@@ -102,18 +107,21 @@ const reloadPage = () => {
 function endScreen(result, rmElements) {
     rmElements.forEach(elem => elem.remove());
 
+    const endGame = document.querySelector(".end-game");
+
     // console.log('end method')
+    // const choices = document.querySelector(".choices");
     const end = document.createElement("div");
     end.id = 'stats'
-    const choices = document.querySelector(".choices");
     end.textContent = showStats();
-    insertAfter(end, choices);
+    endGame.appendChild(end);
+    // insertAfter(end, choices);
 
     const newGame = document.createElement("BUTTON");
-    const stats = document.querySelector("#stats");
     newGame.textContent = "New Game";
     newGame.id = 'refresh'
-    insertAfter(newGame, stats);
+    // insertAfter(newGame, stats);
+    endGame.appendChild(newGame)
     newGame.addEventListener('click', () => reloadPage());
 }
 

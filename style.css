@@ -43,6 +43,14 @@ h1 {
     color: rgb(78, 78, 78);
 }
 
+.end-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
 #stats {
     font-weight: bold;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -57,4 +65,5 @@ h1 {
     border-radius: 5px;
     border-color: antiquewhite;
     user-select: none;
+    max-width: 200px;
 }
