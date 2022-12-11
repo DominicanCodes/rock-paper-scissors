@@ -88,16 +88,6 @@ function showStats() {
             + `\n\tWin/Loss Ratio: ${winLossRatio}`  
 }
 
-function insertAfter(newNode, referenceNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-    // console.log('insert method')
-}
-
-function insertChild(newNode, referenceNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-    console.log('insert Child method')
-}
-
 const reloadPage = () => {
     if (confirm("Are you sure, want to start a new game?")) {
         location.reload(true);
@@ -132,7 +122,6 @@ const result = document.querySelector("#result");
 
 choices.forEach(choice => choice.addEventListener('click', playRound));
 function playRound(e) {
-    
     userChoice = e.target.id;
     userChoice = wordToNum(userChoice);
     message = play(userChoice);
