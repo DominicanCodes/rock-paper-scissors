@@ -94,8 +94,8 @@ function insertAfter(newNode, referenceNode) {
 }
 
 const reloadPage = () => {
-    if (confirm("Are you sure, want to refresh?")) {
-        location.reload();
+    if (confirm("Are you sure, want to start a new game?")) {
+        location.reload(true);
     }
 }
 
@@ -114,7 +114,9 @@ function endScreen(result, rmElements) {
     newGame.textContent = "New Game";
     newGame.id = 'refresh'
     insertAfter(newGame, stats);
+    newGame.addEventListener('click', () => reloadPage());
 }
+
 
 // NEW GAME GUI
 const choices = document.querySelectorAll(".choices div");

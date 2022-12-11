@@ -42,3 +42,19 @@ h1 {
     background-color: antiquewhite;
     color: rgb(78, 78, 78);
 }
+
+#stats {
+    font-weight: bold;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+}
+
+#refresh {
+    background-color: transparent;
+    color: antiquewhite;
+    font-weight: bold;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: antiquewhite;
+    user-select: none;
+}
